@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Calculation</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #e0f7fa, #b2ebf2);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    h1 {
+      margin-top: 40px;
+      font-size: 2.5rem;
+      color: #00796b;
+    }
+
+    .container {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 15px;
+      margin-top: 40px;
+      width: 90%;
+      max-width: 400px;
+    }
+
+    .btn {
+      padding: 20px;
+      font-size: 1.2rem;
+      border: none;
+      border-radius: 15px;
+      background: #004d40;
+      color: white;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      transition: all 0.3s ease;
+      text-align: center;
+      text-decoration: none;
+    }
+
+    .btn:hover {
+      background: #00796b;
+      transform: scale(1.02);
+    }
+
+    footer {
+      margin-top: auto;
+      padding: 20px;
+      text-align: center;
+      color: #004d40;
+      font-size: 0.9rem;
+    }
+
+    @media (min-width: 600px) {
+      .container {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Calculation</h1>
+
+  <div class="container">
+    <a href="calculate.html" class="btn">🧮 Calculate</a>
+    <a href="active-income.html" class="btn">🧾 Active Income</a>
+    <a href="passive-income.html" class="btn">📊 Passive Income</a>
+    <a href="rank-upgradation.html" class="btn">📈 Rank Upgradation</a>
+  </div>
+
+  <footer>
+    © 2025 Nondescript MG
+  </footer>
+</body>
+</html>

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🧾 Active Income</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #f0f4c3, #dcedc8);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    h1 {
+      color: #33691e;
+      margin-bottom: 20px;
+    }
+
+    .calculator {
+      background: white;
+      border-radius: 20px;
+      padding: 25px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 400px;
+    }
+
+    label {
+      display: block;
+      margin: 10px 0 5px;
+      font-weight: bold;
+    }
+
+    select, input[type="number"] {
+      width: 100%;
+      padding: 10px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      margin-bottom: 15px;
+      font-size: 1rem;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      font-size: 1rem;
+      background: #689f38;
+      color: white;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background: #558b2f;
+    }
+
+    #result {
+      margin-top: 20px;
+      font-size: 1.4rem;
+      color: #2e7d32;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    a.back {
+      margin-top: 30px;
+      display: inline-block;
+      text-decoration: none;
+      color: #33691e;
+      font-weight: bold;
+    }
+
+    footer {
+      margin-top: auto;
+      padding: 20px;
+      text-align: center;
+      color: #33691e;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <h1>🧾 Active Income</h1>
+  <div class="calculator">
+    <label for="a">Bridge Rank (a)</label>
+    <select id="a">
+      <option value="BS">BS (20%)</option>
+      <option value="BD">BD (25%)</option>
+      <option value="AM">AM (30%)</option>
+      <option value="TL">TL (38%)</option>
+    </select>
+
+    <label for="b">Product Selling Rank (b)</label>
+    <select id="b">
+      <option value="BS">BS</option>
+      <option value="BD">BD</option>
+      <option value="AM">AM</option>
+    </select>
+
+    <label for="deals">Number of Deals</label>
+    <input type="number" id="deals" min="1" value="1" />
+
+    <button onclick="calculateIncome()">Calculate</button>
+    <div id="result"></div>
+  </div>
+
+  <a href="index.html" class="back">Back to Home</a>
+  <footer>© 2025 Nondescript MG</footer>
+
+  <script>
+    function calculateIncome() {
+      const a = document.getElementById("a").value;
+      const b = document.getElementById("b").value;
+      let deals = parseInt(document.getElementById("deals").value);
+
+      let income = 0;
+      let rates = {
+        BS: { BS: 1700, BD: 1700, AM: 1700 },
+        BD: { BS: 10000, BD: 10950, AM: 11350 },
+        AM: { BS: 10000, BD: 11700, AM: 13500 },
+        TL: { BS: 10000, BD: 14000, AM: 16530 },
+      };
+
+      // Nesting logic
+      for (let i = 1; i <= deals; i++) {
+        if (a === "BS") {
+          income += rates["BS"][b];
+        } else if (a === "BD") {
+          if (i <= 3) {
+            income += rates["BD"][b];
+          } else {
+            income += rates["AM"][b];
+          }
+        } else if (a === "AM") {
+          let amCount = (b === "AM") ? i : 0;
+          if (amCount <= 2) {
+            income += rates["AM"][b];
+          } else {
+            income += rates["TL"][b];
+          }
+        } else if (a === "TL") {
+          income += rates["TL"][b];
+        }
+      }
+
+      document.getElementById("result").innerText = `₹${income.toLocaleString()}`;
+    }
+  </script>
+</body>
+</html>
