@@ -1,0 +1,30 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>My Custom Calculator</title>
+  <style>
+    body { font-family: sans-serif; padding: 20px; background: #f5f5f5; }
+    .box { background: white; padding: 20px; max-width: 400px; margin: auto; border-radius: 10px; box-shadow: 0 0 10px #aaa; }
+    input, button { padding: 10px; margin: 10px 0; width: 100%; }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <h2>Custom Calculator</h2>
+    <input id="input1" type="number" placeholder="Enter A">
+    <input id="input2" type="number" placeholder="Enter B">
+    <button onclick="calculate()">Calculate (A + B)</button>
+    <h3>Result: <span id="result">--</span></h3>
+  </div>
+
+  <script>
+    function calculate() {
+      let a = parseFloat(document.getElementById("input1").value);
+      let b = parseFloat(document.getElementById("input2").value);
+      let result = a + b;
+      document.getElementById("result").innerText = result;
+    }
+  </script>
+</body>
+</html>
