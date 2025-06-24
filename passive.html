@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>📊 Passive Income</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #e1f5fe, #b3e5fc);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    h1 {
+      color: #01579b;
+      margin-bottom: 20px;
+    }
+
+    .calculator {
+      background: white;
+      border-radius: 20px;
+      padding: 25px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 400px;
+    }
+
+    label {
+      display: block;
+      margin: 10px 0 5px;
+      font-weight: bold;
+    }
+
+    select, input[type="number"] {
+      width: 100%;
+      padding: 10px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      margin-bottom: 15px;
+      font-size: 1rem;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      font-size: 1rem;
+      background: #0288d1;
+      color: white;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background: #0277bd;
+    }
+
+    #result {
+      margin-top: 20px;
+      font-size: 1.4rem;
+      color: #01579b;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    a.back {
+      margin-top: 30px;
+      display: inline-block;
+      text-decoration: none;
+      color: #01579b;
+      font-weight: bold;
+    }
+
+    footer {
+      margin-top: auto;
+      padding: 20px;
+      text-align: center;
+      color: #01579b;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <h1>📊 Passive Income</h1>
+  <div class="calculator">
+    <label for="a">Your Rank (a)</label>
+    <select id="a">
+      <option value="BS">BS (20%)</option>
+      <option value="BD">BD (25%)</option>
+      <option value="AM">AM (30%)</option>
+      <option value="TL">TL (38%)</option>
+      <option value="MQ">MQ (41%)</option>
+      <option value="DK">DK (42%)</option>
+      <option value="AD">AD (43%)</option>
+    </select>
+
+    <label for="b">Direct Rank Below You (b)</label>
+    <select id="b">
+      <option value="BS">BS (20%)</option>
+      <option value="BD">BD (25%)</option>
+      <option value="AM">AM (30%)</option>
+      <option value="TL">TL (38%)</option>
+      <option value="MQ">MQ (41%)</option>
+      <option value="DK">DK (42%)</option>
+    </select>
+
+    <label for="c">Deal Purchase Rank (C)</label>
+    <select id="c">
+      <option value="BS">BS (₹8,500)</option>
+      <option value="BD">BD (₹26,500)</option>
+      <option value="AM">AM (₹43,500)</option>
+    </select>
+
+    <label for="deals">Number of Deals</label>
+    <input type="number" id="deals" min="1" value="1" />
+
+    <button onclick="calculatePassiveIncome()">Calculate</button>
+    <div id="result"></div>
+  </div>
+
+  <a href="index.html" class="back">️ Back to Home</a>
+  <footer>© 2025 Nondescript MG</footer>
+
+  <script>
+    function calculatePassiveIncome() {
+      const ranks = {
+        BS: 20,
+        BD: 25,
+        AM: 30,
+        TL: 38,
+        MQ: 41,
+        DK: 42,
+        AD: 43
+      };
+
+      const purchaseValues = {
+        BS: 8500,
+        BD: 26500,
+        AM: 43500
+      };
+
+      const a = document.getElementById("a").value;
+      const b = document.getElementById("b").value;
+      const c = document.getElementById("c").value;
+      const deals = parseInt(document.getElementById("deals").value);
+
+      let percentA = ranks[a];
+      let percentB = ranks[b];
+
+      if (percentB >= percentA) {
+        document.getElementById("result").innerText = `₹0`;
+        return;
+      }
+
+      let difference = percentA - percentB;
+      let result = difference / 100 * purchaseValues[c] * deals;
+
+      if (a === "MQ" || a === "DK" || a === "AD") {
+        result *= 1.06;
+      }
+
+      document.getElementById("result").innerText = `₹${Math.round(result).toLocaleString()}`;
+    }
+  </script>
+</body>
+</html>

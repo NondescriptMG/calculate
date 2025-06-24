@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>📈 Rank Upgradation</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #fce4ec, #f8bbd0);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    h1 {
+      color: #880e4f;
+      margin-bottom: 20px;
+    }
+
+    .calculator {
+      background: white;
+      border-radius: 20px;
+      padding: 25px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 400px;
+    }
+
+    label {
+      display: block;
+      margin: 10px 0 5px;
+      font-weight: bold;
+    }
+
+    select, input[type="number"] {
+      width: 100%;
+      padding: 10px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      margin-bottom: 15px;
+      font-size: 1rem;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      font-size: 1rem;
+      background: #ad1457;
+      color: white;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background: #880e4f;
+    }
+
+    #result {
+      margin-top: 20px;
+      font-size: 1.4rem;
+      color: #880e4f;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    a.back {
+      margin-top: 30px;
+      display: inline-block;
+      text-decoration: none;
+      color: #880e4f;
+      font-weight: bold;
+    }
+
+    footer {
+      margin-top: auto;
+      padding: 20px;
+      text-align: center;
+      color: #880e4f;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <h1>📈 Rank Upgradation</h1>
+  <div class="calculator">
+    <label for="a">Current Rank (a)</label>
+    <select id="a">
+      <option value="BS">BS</option>
+      <option value="BD">BD</option>
+      <option value="AM">AM</option>
+    </select>
+
+    <label for="b">Target Rank (b)</label>
+    <select id="b">
+      <option value="AM">AM</option>
+      <option value="TL">TL</option>
+      <option value="MQ">MQ</option>
+      <option value="DK">DK</option>
+    </select>
+
+    <label for="timePerDeal">Time per Deal (in days)</label>
+    <input type="number" id="timePerDeal" min="1" value="1" />
+
+    <button onclick="calculateUpgradeTime()">Calculate</button>
+    <div id="result"></div>
+  </div>
+
+  <a href="index.html" class="back">Back to Home</a>
+  <footer>© 2025 Nondescript MG</footer>
+
+  <script>
+    function calculateUpgradeTime() {
+      const a = document.getElementById("a").value;
+      const b = document.getElementById("b").value;
+      const timePerDeal = parseInt(document.getElementById("timePerDeal").value);
+
+      const rankOrder = ["BS", "BD", "AM", "TL", "MQ", "DK"];
+      const currentIndex = rankOrder.indexOf(a);
+      const targetIndex = rankOrder.indexOf(b);
+
+      if (targetIndex <= currentIndex) {
+        document.getElementById("result").innerText = "Target rank must be higher than current rank.";
+        return;
+      }
+
+      let totalDeals = 0;
+
+      if (a === "BS" && b === "AM") totalDeals = 3;
+      else if (a === "BD" && b === "AM") totalDeals = 3;
+      else if (a === "BD" && b === "TL") totalDeals = 3;
+      else if (a === "AM" && b === "TL") totalDeals = 2;
+      else if (a === "BS" && b === "TL") totalDeals = 6;
+      else if (a === "BD" && b === "MQ") totalDeals = 6;
+      else if (a === "AM" && b === "MQ") totalDeals = 5;
+      else if (a === "BS" && b === "MQ") totalDeals = 9;
+      else if (a === "BS" && b === "DK") totalDeals = 12;
+      else {
+        document.getElementById("result").innerText = "Upgrade path not directly defined.";
+        return;
+      }
+
+      let totalDays = totalDeals * timePerDeal;
+      let approxMonths = (totalDays / 30).toFixed(1);
+
+      document.getElementById("result").innerText = `Estimated time: ${totalDays} days (≈ ${approxMonths} months)`;
+    }
+  </script>
+</body>
+</html>
